@@ -3,12 +3,12 @@ import pygame
 from random import uniform as rand
 from Bullet import Bullet
 from Identity import Identity
-from threading import Thread
+#from threading import Thread
 
 
 class Playable(Identity):
     def __init__(self, x, y):
-        super(x, y)
+        super().__init__(x, y)
         self.nextShoot = time.time() + 1.5
 
     def shoot(self):
@@ -18,11 +18,12 @@ class Playable(Identity):
         return Bullet()
 
 
-    def runFunction(self):
+    def runFunction(self, screen):
         while self.health > 0:
             self.move()
             self.shoot()
-            self.draw()
+            self.draw(screen)
 
-    def run(self):
-        Thread(target=self.runFunction).start()
+    def run(self, screen):
+        self.runFunction(screen)
+        #Thread(target=self.runFunction).start()
