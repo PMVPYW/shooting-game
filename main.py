@@ -10,6 +10,7 @@ from Enemy import Enemy
 
 pygame.init()
 
+WHITE_RED = (255,200,200)
 BLACK = (0,0,0)
 WHITE = (255,255,255)
 RED = (255,0,0)
@@ -18,8 +19,39 @@ ORANGE = (255,255,0)
 width, height = pyautogui.size()
 screen = pygame.display.set_mode((width, height))
 
-def game():
+game_font = pygame.font.SysFont("Ubuntu", 50)
 
+def menu(kills: int):
+    global game_font, WHITE_RED, BLACK
+    option = None
+
+    while option == None:
+        i = 0
+        screen.fill(BLACK)
+        text = []
+        text.append(game_font.render(F"kills: {kills}", False, WHITE_RED))
+        text.append(game_font.render(F"[Enter] Start the game", False, WHITE_RED))
+        text.append(game_font.render(F"[0] Save the game", False, WHITE_RED))
+        text.append(game_font.render(F"[1] Exit the game", False, WHITE_RED))
+        for x in text:
+            screen.blit(x, (100,100*i))
+            i+=1
+        pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit(0)
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_KP_ENTER or event.key == pygame.K_RETURN:#K_RETURN is normal enter
+                    return "game"
+                if event.key == pygame.K_0 or event.key == pygame.K_KP0:
+                    return"save"
+                if event.key == pygame.K_1 or event.key == pygame.K_KP1:
+                    exit(1)
+
+
+def game():
+    global WHITE_RED
     allies = []
     bullets = []
     enemies = []
@@ -59,7 +91,6 @@ def game():
                          bullets.append(bullet)
 
         screen.fill(BLACK)
-
         #identities running
         t_health = player.health
         for x in allies:
@@ -94,17 +125,31 @@ def game():
             if colision(player, y):
                 player.die()
 
-
-
-
-        current = time.time()-begin
+        current = time.time() - begin
         if int(current) % 5 == 0:
             if not spawned:
-                enemies.append(Enemy(random.randint(0, width), random.randint(height/2, height)))
+                enemies.append(Enemy(random.randint(0, width), random.randint(height / 2, height)))
             spawned = True
         else:
             spawned = False
+
+            #show kills
+        text = game_font.render(F"kills: {kills}", False, WHITE_RED)
+        screen.blit(text, (10, 10))
         pygame.display.update()
+    return kills
+
+
+
+
 
 if __name__ == "__main__":
-    game()
+    kills = 0
+    while 1:
+        option = menu(kills)
+        if option == "game":
+            kills = game()
+        elif option == "exit":
+            exit(0)
+        else:
+            print("In development")
