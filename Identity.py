@@ -1,7 +1,6 @@
 import time
 import pygame
-from random import uniform as rand
-from Bullet import Bullet
+import pyautogui
 
 class Identity:
     def __init__(self, x, y):
@@ -23,6 +22,12 @@ class Identity:
 
     def move(self):
         if time.time() >= self.nextMove:
+            maxX, maxY = pyautogui.size()
             self.nextMove = time.time() + 0.05
+            if self.x+self.xDeslocation >= maxX or self.x+self.xDeslocation <= 0:
+                self.xDeslocation*=-1
+
             self.x+=self.xDeslocation
+            if self.y+self.yDeslocation >= maxY or self.y+self.yDeslocation <= 0:
+                self.yDeslocation*=-1
             self.y+=self.yDeslocation
