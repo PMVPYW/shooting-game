@@ -2,6 +2,7 @@ import random
 import pyautogui
 import pygame
 import time
+from general import colision
 from Ally import Ally
 from Enemy import Enemy
 
@@ -30,11 +31,13 @@ spawned = False
 begin = time.time()
 while 1:
 
-
+    #events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
     screen.fill(BLACK)
+
+    #identities running
     for x in allies:
         bullet = x.run(screen, enemies)
         x.watchEnvironment(allies, enemies, bullets)
@@ -44,10 +47,19 @@ while 1:
         bullet = x.run(screen, enemies)
         if bullet != None:
             bullets.append(bullet)
-
-
     for x in bullets:
         x.run(screen)
+
+    #colision detection
+    for x in enemies:
+        for y in bullets:
+            if colision(x, y):
+                enemies.remove(x)
+                bullets.remove(y)
+
+
+
+
     current = time.time()-begin
     if int(current) % 5 == 0:
         if not spawned:
