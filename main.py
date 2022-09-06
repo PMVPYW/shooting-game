@@ -51,10 +51,16 @@ while 1:
         x.run(screen)
 
     #colision detection
-    for x in enemies:
-        for y in bullets:
+    for y in bullets:
+        for x in enemies:
             if colision(x, y):
+                x.die()
                 enemies.remove(x)
+                bullets.remove(y)
+
+        for x in allies:
+            if colision(x, y):
+                x.die()
                 bullets.remove(y)
 
 

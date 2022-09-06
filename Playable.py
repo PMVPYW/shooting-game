@@ -10,6 +10,7 @@ class Playable(Identity):
         super().__init__(x, y)
         self.nextShoot = time.time() + 0.5
         self.ammoDirection = ammoDir
+        self.lastId = 0
 
     def shoot(self):
         if time.time() < self.nextShoot:

@@ -13,7 +13,7 @@ class Ally(Playable):
     def __init__(self,  x: int, y: int):
         super().__init__(x, y, 1)
         self.color = (0,255,0)
-        self.lastId = 0
+
 
     def shoot(self):
         if time.time() < self.nextShoot:

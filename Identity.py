@@ -19,6 +19,8 @@ class Identity:
     def draw(self, screen: pygame.display):
         pygame.draw.rect(screen, self.color, (self.x, self.y, self.width, self.height))
 
+    def die(self):
+        self.health = 0
 
     def move(self):
         if time.time() >= self.nextMove:

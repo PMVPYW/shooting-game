@@ -1,8 +1,12 @@
+from Bullet import Bullet
 from Identity import Identity
 
 
-def colision(id1: Identity, id2: Identity):
-    if id1.x + id1.xDeslocation >= id2.x + id2.xDeslocation and id1.x + id1.xDeslocation + id1.width <= id2.x:
-        if id1.y + id1.yDeslocation + id1.height >= id2.y + id2.yDeslocation + id2.height and id1.y + id1.yDeslocation <= id2.y+ id1.yDeslocation:
-            return True
+def colision(id1: Identity, bullet: Bullet):
+    if id1.lastId == bullet.id:
         return False
+
+    if (id1.x+id1.width >= bullet.x) and (id1.x <= bullet.x+bullet.width):
+        if (id1.y <= bullet.y) and (id1.y + id1.height >= bullet.y):
+            return True
+    return False
