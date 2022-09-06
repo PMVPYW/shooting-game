@@ -26,7 +26,8 @@ for x in range(5):
 
 screen = pygame.display.set_mode((width, height))
 
-
+spawned = False
+begin = time.time()
 while 1:
 
 
@@ -47,7 +48,11 @@ while 1:
 
     for x in bullets:
         x.run(screen)
-
-    if time.time() % 5 == 0:
-        enemies.append(Enemy(random.randin(0, width), random.randint(height/2, height)))
+    current = time.time()-begin
+    if int(current) % 5 == 0:
+        if not spawned:
+            enemies.append(Enemy(random.randint(0, width), random.randint(height/2, height)))
+        spawned = True
+    else:
+        spawned = False
     pygame.display.update()

@@ -20,7 +20,7 @@ class Ally(Playable):
             return
         self.nextShoot = time.time()+rand(0, 2.5)
         self.lastId = self.x+self.y
-        return Bullet(self.x+self.width/2,self.y+self.height, self.ammoDirection, self.x+self.y)
+        return Bullet(self.x+self.width/2+self.xDeslocation,self.y+self.height+self.yDeslocation, self.ammoDirection, self.x+self.y)
 
     def watchEnvironment(self, allies: Playable, enemys: Playable, bullets: Identity):
         for bullet in bullets:
