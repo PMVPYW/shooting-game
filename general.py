@@ -7,6 +7,6 @@ def colision(id1: Identity, bullet: Bullet):
         return False
 
     if (id1.x+id1.width >= bullet.x) and (id1.x <= bullet.x+bullet.width):
-        if (id1.y <= bullet.y) and (id1.y + id1.height >= bullet.y):
+        if (id1.y <= bullet.y+bullet.height) and (id1.y + id1.height >= bullet.y):
             return True
     return False
