@@ -1,5 +1,4 @@
 
-
 This project is made in python with the library pygame
 
 ![image](https://user-images.githubusercontent.com/89748192/188851489-40ad4528-06e5-4fda-b94c-9e899accd9e9.png)
