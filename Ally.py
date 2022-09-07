@@ -34,7 +34,7 @@ class Ally(Playable):
                     if bullet.x <= self.x:
                         self.xDeslocation=5
                         if bullet.y <= self.y+self.height*2 and bullet.y >= self.y+self.height:
-                            self.y+=5
+                            self.y-=5
                         elif bullet.y >= self.y-self.height and bullet.y <= self.y:
                             self.y+=5
                     elif bullet.x >= self.x:

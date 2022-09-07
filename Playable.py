@@ -1,5 +1,6 @@
 import time
 import pygame
+import pyautogui
 from random import uniform as rand
 from Bullet import Bullet
 from Identity import Identity
@@ -28,4 +29,20 @@ class Playable(Identity):
 
     def run(self, screen, enemys):
         return self.runFunction(screen, enemys)
+
+    def move(self):
+        if time.time() >= self.nextMove:
+            maxX, maxY = pyautogui.size()
+            self.nextMove = time.time() + 0.05
+            if self.x+self.xDeslocation >= maxX or self.x+self.xDeslocation <= 0:
+                self.xDeslocation*=-1
+
+            self.x+=self.xDeslocation
+            if self.y+self.yDeslocation >= maxY or self.y+self.yDeslocation <= 0:
+                self.yDeslocation*=-1
+            self.y+=self.yDeslocation
+            if self.y < 0:
+                self.y = 0
+            elif self.y > maxY-self.height:
+                self.y = maxY-self.height
 

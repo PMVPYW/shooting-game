@@ -31,3 +31,11 @@ class Bullet(Identity):
 
     def run(self, screen):
         self.runFunction(screen)
+
+    def ReadyToDelete(self):
+        if self.exists:
+            maxX, maxY = pyautogui.size()
+            if self.x > maxX or self.x < 0 or self.y > maxY or self.y < 0:
+                self.exists = False
+                return True
+        return False
