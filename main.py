@@ -1,12 +1,24 @@
 import random
-import pyautogui
-import pygame
+import os
+try:
+    import pyautogui
+    import pygame
+    import psutil
+except:
+    print("Installing libraries")
+    os.system("pip install pyautogui")
+    os.system("pip install pygame")
+    os.system("pip install psutil")
+    import pyautogui
+    import pygame
+    import psutil
 import time
 from Player import Player
 from general import colision
 from Ally import Ally
 from Enemy import Enemy
-import os, psutil, sys
+
+import sys
 process = psutil.Process(os.getpid())
 
 PROFILING = True
@@ -63,7 +75,7 @@ def profile_memory():
     plt.xlabel("Number of measurements")
     plt.legend(["process", "enemys", "bullets"])
     plt.show()
-    
+
 
 def menu(kills: int):
     global game_font, WHITE_RED, BLACK, memory_profiler, enemys_profiler, bullets_profiler
