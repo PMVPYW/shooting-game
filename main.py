@@ -63,6 +63,7 @@ def profile_memory():
     plt.xlabel("Number of measurements")
     plt.legend(["process", "enemys", "bullets"])
     plt.show()
+    
 
 def menu(kills: int):
     global game_font, WHITE_RED, BLACK, memory_profiler, enemys_profiler, bullets_profiler
